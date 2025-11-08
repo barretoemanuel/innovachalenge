@@ -1,11 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gabigol — Trajetória da Carreira</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
+    <header class="site-header">
+        <div class="container">
+            <h1>Gabigol</h1>
+            <nav>
+                <a href="#sobre">Sobre</a>
+                <a href="#timeline">Linha do Tempo</a>
+                <a href="#estatisticas">Estatísticas</a>
+                <a href="#midia">Mídia</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="sobre" class="hero">
+            <div class="hero-img">
+                <!-- Imagem pública; substitua se quiser uma local -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Gabriel_Barbosa_2019.jpg" alt="Gabigol (Gabriel Barbosa)" />
+            </div>
+            <div class="hero-content">
+                <h2>Gabriel Barbosa Almeida</h2>
+                <p class="lead">Conhecido como Gabigol, nascido em 30 de agosto de 1996. Este site reúne a trajetória da carreira profissional, clubes, conquistas e estatísticas até a data atual.</p>
+                <p>Fontes e detalhes atualizados podem ser consultados em: <a href="https://pt.wikipedia.org/wiki/Gabriel_Barbosa" target="_blank" rel="noopener">Página do Wikipedia</a>.</p>
+            </div>
+        </section>
+
+        <section id="timeline" class="card">
+            <h3>Linha do Tempo</h3>
+            <p>Resumo cronológico dos clubes e períodos (clique em cada item para mais detalhes).</p>
+            <ul class="timeline-list">
+                <li class="timeline-item" data-year="2011–2013">
+                    <strong>Juventude/Infantil</strong>
+                    <div class="small">Desenvolvimento nas categorias de base até chegar ao profissional no Santos.</div>
+                    <details>
+                        <summary>Mais</summary>
+                        <p>Revelado nas categorias de base do Santos, ganhou destaque juvenil e integrou o elenco profissional ainda jovem.</p>
+                    </details>
+                </li>
+
+                <li class="timeline-item" data-year="2013–2016">
+                    <strong>Santos (Estreia e ascensão)</strong>
+                    <div class="small">Estreia no profissional, gols importantes e projeção nacional.</div>
+                    <details>
+                        <summary>Mais</summary>
+                        <p>No Santos, Gabigol consolidou-se como atacante promissor, recebendo atenção de clubes europeus.</p>
+                    </details>
+                </li>
+
+                <li class="timeline-item" data-year="2016–2019">
+                    <strong>Inter de Milão (transferência) e empréstimos</strong>
+                    <div class="small">Transferência à Europa e sequência de empréstimos para readaptação.</div>
+                    <details>
+                        <summary>Mais</summary>
+                        <p>Passou pelo futebol europeu e teve empréstimos que visaram recuperar ritmo e confiança.</p>
+                    </details>
+                </li>
+
+                <li class="timeline-item" data-year="2018–presente">
+                    <strong>Flamengo (retorno ao Brasil / consolidação)</strong>
+                    <div class="small">Período de consagração nacional e internacional pelo Flamengo.</div>
+                    <details>
+                        <summary>Mais</summary>
+                        <p>No Flamengo, Gabigol alcançou grande visibilidade, conquistou títulos coletivos e prêmios individuais, tornando-se ídolo entre a torcida.</p>
+                    </details>
+                </li>
+            </ul>
+        </section>
+
+        <section id="estatisticas" class="card">
+            <h3>Estatísticas e números</h3>
+            <p>Os números mudam frequentemente. Para estatísticas atualizadas, consulte a página oficial do jogador ou bases de dados esportivas.</p>
+            <ul>
+                <li><strong>Posição:</strong> Atacante</li>
+                <li><strong>Período profissional:</strong> 2013 — presente</li>
+                <li><strong>Clube(s) de destaque:</strong> Santos, Inter (Itália), Flamengo</li>
+            </ul>
+            <p>Links úteis:</p>
+            <ul>
+                <li><a href="https://pt.wikipedia.org/wiki/Gabriel_Barbosa" target="_blank" rel="noopener">Wikipedia (pt)</a></li>
+            </ul>
+        </section>
+
+        <section id="midia" class="card">
+            <h3>Mídia</h3>
+            <p>Vídeos e imagens selecionadas (conteúdo externo).</p>
+            <div class="media-grid">
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Gabriel_Barbosa_2019.jpg" alt="Gabigol em ação" />
+                    <figcaption>Gabigol em jogo (créditos: Wikimedia Commons)</figcaption>
+                </figure>
+                <div class="video-wrap">
+                    <!-- Exemplo de embed do YouTube; substitua o `VIDEO_ID` por um clipe real se desejar -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="Vídeo de melhores momentos" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h3>Notas finais</h3>
+            <p>Este site foi gerado localmente e contém um sumário da trajetória do Gabigol. Para dados exatos de partidas, gols e temporadas, verifique as fontes oficiais ou a página de estatísticas atualizada.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <small>Feito localmente — conteúdo informativo. Fontes: Wikipedia, clubes e cobertura esportiva.</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
