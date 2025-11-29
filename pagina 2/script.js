@@ -182,14 +182,10 @@ class Ghost {
         this.x = x * CELL_SIZE;
         this.y = y * CELL_SIZE;
         this.color = color;
-        this.direction = 'up';
+        this.direction = 'right';
         this.speed = 1;
         this.startX = x * CELL_SIZE;
         this.startY = y * CELL_SIZE;
-        this.inHouse = true;
-        this.hasFoundPacman = false;
-        this.targetX = 0;
-        this.targetY = 0;
     }
 
     draw() {
@@ -253,117 +249,14 @@ class Ghost {
                 MAZE_LAYOUT[gridY2]?.[gridX2] === 'W');
     }
 
-    calculateDistance(x1, y1, x2, y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    }
+    move() {
+        const possibleDirections = ['right', 'left', 'up', 'down'].filter(dir => 
+            this.canMove(dir)
+        );
 
-    getBestDirectionToTarget(targetX, targetY) {
-        const directions = ['right', 'left', 'up', 'down'];
-        let bestDirection = this.direction;
-        let shortestDistance = Infinity;
-
-        directions.forEach(dir => {
-            if (this.canMove(dir)) {
-                let testX = this.x;
-                let testY = this.y;
-
-                switch(dir) {
-                    case 'right': testX += CELL_SIZE; break;
-                    case 'left': testX -= CELL_SIZE; break;
-                    case 'up': testY -= CELL_SIZE; break;
-                    case 'down': testY += CELL_SIZE; break;
-                }
-
-                const distance = this.calculateDistance(testX, testY, targetX, targetY);
-                if (distance < shortestDistance) {
-                    shortestDistance = distance;
-                    bestDirection = dir;
-                }
-            }
-        });
-
-        return bestDirection;
-    }
-
-    moveOutOfHouse() {
-        if (this.y > 11 * CELL_SIZE) {
-            if (this.canMove('up')) {
-                this.direction = 'up';
-                this.y -= this.speed;
-            }
-        } else {
-            this.inHouse = false;
+        if (!this.canMove(this.direction) || Math.random() < 0.03) {
+            this.direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
         }
-    }
-
-    updateBehavior(pacman, redGhost) {
-        if (this.inHouse) {
-            this.moveOutOfHouse();
-            return;
-        }
-
-        // Red Ghost (Blinky) - Direct chase
-        if (this.color === 'red') {
-            this.targetX = pacman.x;
-            this.targetY = pacman.y;
-        }
-        // Pink Ghost (Pinky) - Ambush
-        else if (this.color === 'pink') {
-            // Target 4 tiles ahead of Pacman in his current direction
-            let targetOffset = 4 * CELL_SIZE;
-            switch(pacman.direction) {
-                case 'right':
-                    this.targetX = pacman.x + targetOffset;
-                    this.targetY = pacman.y;
-                    break;
-                case 'left':
-                    this.targetX = pacman.x - targetOffset;
-                    this.targetY = pacman.y;
-                    break;
-                case 'up':
-                    this.targetX = pacman.x;
-                    this.targetY = pacman.y - targetOffset;
-                    break;
-                case 'down':
-                    this.targetX = pacman.x;
-                    this.targetY = pacman.y + targetOffset;
-                    break;
-            }
-        }
-        // Blue Ghost (Inky) - Patrol and Chase
-        else if (this.color === 'cyan') {
-            const distanceToPacman = this.calculateDistance(this.x, this.y, pacman.x, pacman.y);
-            if (distanceToPacman < 6 * CELL_SIZE) {
-                this.hasFoundPacman = true;
-            }
-
-            if (this.hasFoundPacman) {
-                this.targetX = pacman.x;
-                this.targetY = pacman.y;
-            } else {
-                // Patrol behavior
-                if (!this.canMove(this.direction) || Math.random() < 0.03) {
-                    const possibleDirections = ['right', 'left', 'up', 'down'].filter(dir => this.canMove(dir));
-                    this.direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
-                }
-                return; // Skip the normal movement logic when patrolling
-            }
-        }
-        // Orange Ghost (Clyde) - Random movement (unchanged)
-        else {
-            if (!this.canMove(this.direction) || Math.random() < 0.03) {
-                const possibleDirections = ['right', 'left', 'up', 'down'].filter(dir => this.canMove(dir));
-                this.direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
-            }
-            return; // Skip the normal movement logic for random movement
-        }
-
-        // Update direction based on target
-        this.direction = this.getBestDirectionToTarget(this.targetX, this.targetY);
-    }
-
-    move(pacman, redGhost) {
-        this.updateBehavior(pacman, redGhost);
 
         if (this.canMove(this.direction)) {
             switch(this.direction) {
@@ -484,9 +377,8 @@ function gameLoop() {
     pacman.move();
     pacman.draw();
     
-    const redGhost = ghosts.find(ghost => ghost.color === 'red');
     ghosts.forEach(ghost => {
-        ghost.move(pacman, redGhost);
+        ghost.move();
         ghost.draw();
     });
 
